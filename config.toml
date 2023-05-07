@@ -41,3 +41,8 @@ paginate = 20
     single = "right"
     widgets = ["search", "recent", "categories", "taglist", "social"]
 
+# 画像表示用オプション
+ [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
