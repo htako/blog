@@ -19,6 +19,7 @@ paginate = 20
     avatar = ""
 
 [Params]
+    DateForm = "2.1.2006"
     customCSS = ["css/custom.css"]
     copyright = "Author"
     readmore = true
