@@ -66,8 +66,11 @@ Error: Action failed with &quot;The process '/usr/bin/git' failed with exit code
 </ul>
 <p>が必要らしかった。<br>
 今回は、Deployのステージにある <code>peaceiris/actions-gh-pages@v3</code> で権限が足りない。<br>
-よって、ちょっと広めにとって <code>peaceiris/*</code> を入力してみた。<br>
-そうしたら、ジョブが最後まで通るじゃないですか。</p>
+よって、ちょっと広めにとって <code>peaceiris/*</code> を入力してみた。</p>
+<p>もう一つ、ここでwriteの権限を設定してあげないといけなかった。</p>
+<figure><img src=./20230509_002.png width=100%>
+</figure>
+<p>そうしたら、ジョブが最後まで通るじゃないですか。</p>
 <h2 id=そして勘違いしていた>そして勘違いしていた</h2>
 <p><code>main</code> ブランチでpushしたら <code>main</code> ブランチにコンテンツができてそれが公開できるのだと思っていたら、この github actions はそうではなくて、<code>main</code> ブランチにpushしたら、そのソースからブランチにコンテンツだけのブランチ <code>gh-pages</code> を作るものだった。<br>
 なので、github pagesで公開すべきブランチは <code>main</code> ではなくて <code>gh-pages</code> になる。<br>
