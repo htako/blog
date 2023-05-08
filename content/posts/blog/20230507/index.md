@@ -3,7 +3,6 @@ title: "書き始め"
 date: 2023-05-07
 categories: ["hugo"]
 tags: ["blog"]
-menu: main
 ---
 
 ## github pages

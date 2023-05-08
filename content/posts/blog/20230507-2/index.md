@@ -2,8 +2,7 @@
 title: "github pages の build に失敗"
 date: 2023-05-07
 categories: ["hugo"]
-tags: ["blog", "github pages"]
-menu: main
+tags: ["blog", "github pages", "github actions"]
 ---
 
 ## github actionsに失敗した
