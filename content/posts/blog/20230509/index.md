@@ -40,6 +40,11 @@ Error: Action failed with "The process '/usr/bin/git' failed with exit code 128"
 が必要らしかった。  
 今回は、Deployのステージにある `peaceiris/actions-gh-pages@v3` で権限が足りない。  
 よって、ちょっと広めにとって `peaceiris/*` を入力してみた。  
+
+もう一つ、ここでwriteの権限を設定してあげないといけなかった。
+
+{{<figure src="./20230509_002.png" width="100%">}}
+
 そうしたら、ジョブが最後まで通るじゃないですか。
 
 ## そして勘違いしていた
