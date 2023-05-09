@@ -3,12 +3,12 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>github pages の build に失敗 - htako memo</title>
+<title>Sample Page - htako memo</title>
 <script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script>
 <meta name=description content>
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="github pages の build に失敗">
-<meta name=twitter:description content="github actionsに失敗した pushした後自動的にhugoのbuildに入るが Build with Jekyll というステージで失敗する。 Liquid Exception: Invalid Date: '&#34;{{ .Date }}&#34;' is not a valid datetime. in /_layouts/default.html ERROR: YOUR">
+<meta name=twitter:title content="Sample Page">
+<meta name=twitter:description content="HUGOのサンプル h1 h2 h3 h4 h5 h6 a b c d e f $ bash BOLD italic 44GG44KT44GT #include <stdio.h> int main() { printf(&#34;Hello, World!\n&#34;); return 0; }">
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link rel=dns-prefetch href=//fonts.googleapis.com>
 <link rel=dns-prefetch href=//fonts.gstatic.com>
@@ -47,74 +47,66 @@
 <main class=main role=main>
 <article class=post>
 <header class=post__header>
-<h1 class=post__title>github pages の build に失敗</h1>
+<h1 class=post__title>Sample Page</h1>
 <div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2023-05-07T00:00:00Z>May 07, 2023</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2 1 2h8v11H0V2z"/></svg><span class=meta__text><a class=meta__link href=/blog/categories/hugo/ rel=category>hugo</a>
+<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2021-01-01T00:00:00Z>January 01, 2021</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2 1 2h8v11H0V2z"/></svg><span class=meta__text><a class=meta__link href=/blog/categories/hugo/ rel=category>hugo</a>
 </span>
 </div></div>
 </header><div class="content post__content clearfix">
-<h2 id=github-actionsに失敗した>github actionsに失敗した</h2>
-<p>pushした後自動的にhugoのbuildに入るが <code>Build with Jekyll</code> というステージで失敗する。</p>
-<pre><code>  Liquid Exception: Invalid Date: '&quot;{{ .Date }}&quot;' is not a valid datetime. in /_layouts/default.html
-             ERROR: YOUR SITE COULD NOT BE BUILT:
-                    ------------------------------------
-                    Invalid Date: '&quot;{{ .Date }}&quot;' is not a valid datetime.
-</code></pre><img src=20230507_001.png>
-<p>問題を解消しようと調べたが、そもそもこのフェーズってあんまり想定してなかったよなと思い、色々調べていくうちに .nojekyll という空ファイルを作ることで jekyll のフェーズをスキップできるらしいという知見を得る。</p>
-<p><a href=https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/>https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/</a></p>
-<p>やってみたら、確かにステージがなくなって、buildも通った。</p>
-<h2 id=content-フォルダの下のコンテンツの配置について>content フォルダの下のコンテンツの配置について</h2>
-<p>hugo は content フォルダの下にあるファイルをwebコンテンツとして書き出してくれるらしい。
-また、そのパスはあまり重要でなく、良しなにやってくれるらしい。
-画像を張るときには index.md というファイル名にするとうまいことやってくれるという話のようなので、パスとしては</p>
-<pre><code>content
-  -- posts
-    -- 20230507
-      -- index.md
-      -- image.png
-    -- 20230508
-      -- index.md
-      -- image.png
-    -- ...
-</code></pre><p>というような感じで配置するのがよさそう。<br>
-ファイル数多くなってくるとつらくなる可能性はあるが、それはその時ということで。</p>
-<h2 id=hugo-コマンドでパスとmdファイルは作れるらしい>hugo コマンドでパスとmdファイルは作れるらしい</h2>
-<pre><code>hugo new posts/20230507/index.md
-</code></pre><p>とすれば、content/posts/20230507/index.md が作成されるらしい。
-実際に作ってみると、ファイルの中身は以下のようになっていた。</p>
-<pre><code>---
-title: &quot;20230507&quot;
-date: 2023-05-07T15:01:38+09:00
-categories: [&quot;&quot;]
-tags: [&quot;&quot;]
----
-</code></pre><p>何かのテンプレートから作っているのだろうと思い、調べてみると、archetypes というフォルダの default.md から作っていそう。</p>
-<pre><code>---
-title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot;
-date: {{ .Date }}
-categories: [&quot;&quot;]
-tags: [&quot;&quot;]
----
-</code></pre><p>default.md という名前から推測するに、指定の仕方でいくつかテンプレートを用意して使い分けることができそう。この辺はのちのち調べることにする。</p>
-<h2 id=build-が通ったがページが表示されない>build が通ったがページが表示されない</h2>
-<p>そして一番の問題。<br>
-そう、ページが表示されない。<br>
-このポストを書いている今、このポストを表示する見込みがない。<br>
-これを解消しないといけない。</p>
-<img src=20230507_002.png>
+<h1 id=hugoのサンプル>HUGOのサンプル</h1>
+<h1 id=h1>h1</h1>
+<h2 id=h2>h2</h2>
+<h3 id=h3>h3</h3>
+<h4 id=h4>h4</h4>
+<h5 id=h5>h5</h5>
+<h6 id=h6>h6</h6>
+<ul>
+<li>
+<p>a</p>
+<ul>
+<li>b
+<ul>
+<li>c</li>
+<li>d</li>
+</ul>
+</li>
+<li>e</li>
+</ul>
+</li>
+<li>
+<p>f</p>
+</li>
+<li>
+<p><code>$ bash</code></p>
+</li>
+<li>
+<p><strong>BOLD</strong></p>
+</li>
+<li>
+<p><em>italic</em></p>
+</li>
+<li>
+<p><del>44GG44KT44GT</del></p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+  printf(<span style=color:#e6db74>&#34;Hello, World!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+  <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><figure><img src=./image.jpeg alt=モード width=75%>
+</figure>
 </div>
 <footer class=post__footer>
 <div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg>
 <ul class=tags__list>
 <li class=tags__item>
-<a class="tags__link btn" href=/blog/tags/blog/ rel=tag>blog</a>
+<a class="tags__link btn" href=/blog/tags/go/ rel=tag>go</a>
 </li>
 <li class=tags__item>
-<a class="tags__link btn" href=/blog/tags/github-pages/ rel=tag>github pages</a>
-</li>
-<li class=tags__item>
-<a class="tags__link btn" href=/blog/tags/github-actions/ rel=tag>github actions</a>
+<a class="tags__link btn" href=/blog/tags/markdown/ rel=tag>markdown</a>
 </li>
 </ul>
 </div>
@@ -130,23 +122,15 @@ tags: [&quot;&quot;]
 </div>
 </div>
 </div>
-<aside class=sidebar><div class="widget-search widget">
-<form class=widget-search__form role=search method=get action=https://google.com/search>
-<label>
-<input class=widget-search__field type=search placeholder=検索… name=q aria-label=検索…>
-</label>
-<input class=widget-search__submit type=submit value=Search>
-<input type=hidden name=sitesearch value=https://htako.github.io/blog>
-</form>
-</div>
+<aside class=sidebar>
 <div class="widget-recent widget">
 <h4 class=widget__title>最近の投稿</h4>
 <div class=widget__content>
 <ul class=widget__list>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230509/>github actionsが動いてなかった</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230507-2/>github pages の build に失敗</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230507/>書き始め</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/sample/>Sample Page</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230510/>まだhugoのひゅの字も知らない</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230509/>github actionsが動いてなかった</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230507-2/>github pages の build に失敗</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230507/>書き始め</a></li>
 </ul>
 </div>
 </div>
@@ -162,6 +146,7 @@ tags: [&quot;&quot;]
 <div class="widget-taglist widget">
 <h4 class=widget__title>タグ</h4>
 <div class=widget__content>
+<a class="widget-taglist__link widget__link btn" href=/blog/tags/ title=Tags>Tags</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/blog/ title=blog>blog</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/github-actions/ title="github actions">github actions</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/github-pages/ title="github pages">github pages</a>

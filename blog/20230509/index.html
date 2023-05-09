@@ -3,12 +3,12 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta http-equiv=x-ua-compatible content="IE=edge">
-<title>書き始め - htako memo</title>
+<title>github actionsが動いてなかった - htako memo</title>
 <script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script>
 <meta name=description content>
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="書き始め">
-<meta name=twitter:description content="github pages こちらでいろいろ試してみようかなと思う。 かなり散文的になる見込み。 事始め ここからforkさせていただいたものを使っています。 https://github.com/kat0h/hugo-blog-template いったん元">
+<meta name=twitter:title content="github actionsが動いてなかった">
+<meta name=twitter:description content="OSのイメージを変えたら進んだ そもそも、github actionsが動くはずのコンテナがgetできてない雰囲気だったので、.github/w">
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link rel=dns-prefetch href=//fonts.googleapis.com>
 <link rel=dns-prefetch href=//fonts.gstatic.com>
@@ -47,39 +47,54 @@
 <main class=main role=main>
 <article class=post>
 <header class=post__header>
-<h1 class=post__title>書き始め</h1>
+<h1 class=post__title>github actionsが動いてなかった</h1>
 <div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2023-05-07T00:00:00Z>May 07, 2023</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2 1 2h8v11H0V2z"/></svg><span class=meta__text><a class=meta__link href=/blog/categories/hugo/ rel=category>hugo</a>
+<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2023-05-09T00:00:00Z>May 09, 2023</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2 1 2h8v11H0V2z"/></svg><span class=meta__text><a class=meta__link href=/blog/categories/hugo/ rel=category>hugo</a>
 </span>
 </div></div>
 </header><div class="content post__content clearfix">
-<h2 id=github-pages>github pages</h2>
-<p>こちらでいろいろ試してみようかなと思う。<br>
-かなり散文的になる見込み。</p>
-<h2 id=事始め>事始め</h2>
-<p>ここからforkさせていただいたものを使っています。</p>
-<p><a href=https://github.com/kat0h/hugo-blog-template>https://github.com/kat0h/hugo-blog-template</a></p>
-<p>いったん元記事は削除しないで、新しい記事を書くときにそのままテンプレート的に使おうと思います。</p>
-<p>git clone をしたけど最初エラーが出て、</p>
-<pre><code>WARN 2023/05/07 10:23:23 found no layout file for &quot;HTML&quot; for kind &quot;home&quot;: You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
-</code></pre><p>なんでだろと思っていたんですが、themesファイルがサブモジュールになっていたのに気づいて解決。<br>
-サブモジュールを後から取得するコマンド。</p>
-<pre><code>git submodule update -i
-</code></pre><h2 id=最初の記事で気づいたこと>最初の記事で気づいたこと</h2>
-<p>改行は入れないといけない。<br>
-markdown記法だからスペース2つで改行してくれる。<br>
-スペース2つって使いやすいんですかね。エディタで見えないから、結構入れ忘れそうな気がする。改行ってプレビューで見直しても結構見逃すイメージ。<br>
-慣れの問題な気もする。ちゃんとエディタの表示をONにしておかなければ。</p>
-<h2 id=後々確認>後々確認</h2>
-<p>hugo serve した後に編集したものは反映されない。<br>
-プレビューしたときには即座に反映された方が良さげなので、そのあたりコマンド詳細を確認する。</p>
+<h2 id=osのイメージを変えたら進んだ>OSのイメージを変えたら進んだ</h2>
+<p>そもそも、github actionsが動くはずのコンテナがgetできてない雰囲気だったので、<code>.github/workflows/gh-pages.yml</code> の runs-on の指定を <code>ubuntu-latest</code> にしてみたら、先に進めた。</p>
+<pre><code>変更前）
+    runs-on: ubuntu-18.04
+変更後）
+    runs-on: ubuntu-latest
+</code></pre><h2 id=git-commit-ができていなそう>git commit ができていなそう</h2>
+<p>Deployのステージで落ちている。<br>
+エラーメッセージは、どうみても権限関係である。</p>
+<pre><code>/usr/bin/git push origin gh-pages
+remote: Permission to htako/blog.git denied to github-actions[bot].
+fatal: unable to access 'https://github.com/htako/blog.git/': The requested URL returned error: 403
+Error: Action failed with &quot;The process '/usr/bin/git' failed with exit code 128&quot;
+</code></pre><p>よくよく調べていくと、この画面にあたった。</p>
+<figure><img src=./20230509_001.png width=100%>
+</figure>
+<p>ここで</p>
+<ul>
+<li><code>Allow htako, and select non-htako, actions and reusable workflows</code> を選択</li>
+<li><code>Allow specified actions and reusable workflows</code> のテキストエリアに実行したいアクションを記述</li>
+</ul>
+<p>が必要らしかった。<br>
+今回は、Deployのステージにある <code>peaceiris/actions-gh-pages@v3</code> で権限が足りない。<br>
+よって、ちょっと広めにとって <code>peaceiris/*</code> を入力してみた。</p>
+<p>もう一つ、ここでwriteの権限を設定してあげないといけなかった。</p>
+<figure><img src=./20230509_002.png width=100%>
+</figure>
+<p>そうしたら、ジョブが最後まで通るじゃないですか。</p>
+<h2 id=そして勘違いしていた>そして勘違いしていた</h2>
+<p><code>main</code> ブランチでpushしたら <code>main</code> ブランチにコンテンツができてそれが公開できるのだと思っていたら、この github actions はそうではなくて、<code>main</code> ブランチにpushしたら、そのソースからブランチにコンテンツだけのブランチ <code>gh-pages</code> を作るものだった。<br>
+なので、github pagesで公開すべきブランチは <code>main</code> ではなくて <code>gh-pages</code> になる。<br>
+ようやくこのジョブの構造が理解できてきた。</p>
 </div>
 <footer class=post__footer>
 <div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg>
 <ul class=tags__list>
 <li class=tags__item>
 <a class="tags__link btn" href=/blog/tags/blog/ rel=tag>blog</a>
+</li>
+<li class=tags__item>
+<a class="tags__link btn" href=/blog/tags/github-actions/ rel=tag>github actions</a>
 </li>
 </ul>
 </div>
@@ -95,23 +110,15 @@ markdown記法だからスペース2つで改行してくれる。<br>
 </div>
 </div>
 </div>
-<aside class=sidebar><div class="widget-search widget">
-<form class=widget-search__form role=search method=get action=https://google.com/search>
-<label>
-<input class=widget-search__field type=search placeholder=検索… name=q aria-label=検索…>
-</label>
-<input class=widget-search__submit type=submit value=Search>
-<input type=hidden name=sitesearch value=https://htako.github.io/blog>
-</form>
-</div>
+<aside class=sidebar>
 <div class="widget-recent widget">
 <h4 class=widget__title>最近の投稿</h4>
 <div class=widget__content>
 <ul class=widget__list>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230509/>github actionsが動いてなかった</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230507-2/>github pages の build に失敗</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/blog/20230507/>書き始め</a></li>
-<li class=widget__item><a class=widget__link href=/blog/posts/sample/>Sample Page</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230510/>まだhugoのひゅの字も知らない</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230509/>github actionsが動いてなかった</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230507-2/>github pages の build に失敗</a></li>
+<li class=widget__item><a class=widget__link href=/blog/blog/20230507/>書き始め</a></li>
 </ul>
 </div>
 </div>
@@ -127,6 +134,7 @@ markdown記法だからスペース2つで改行してくれる。<br>
 <div class="widget-taglist widget">
 <h4 class=widget__title>タグ</h4>
 <div class=widget__content>
+<a class="widget-taglist__link widget__link btn" href=/blog/tags/ title=Tags>Tags</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/blog/ title=blog>blog</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/github-actions/ title="github actions">github actions</a>
 <a class="widget-taglist__link widget__link btn" href=/blog/tags/github-pages/ title="github pages">github pages</a>
