@@ -14,17 +14,17 @@ paginate = 20
 
 # 自己紹介
 [Author]
-    name = "htako"
-    bio = "まとまってないけど書いておきたいやつのあつまりです。"
-    avatar = ""
+  name = "htako"
+  bio = "まとまってないけど書いておきたいやつのあつまりです。"
+  avatar = ""
 
 [Params]
-    customCSS = ["css/custom.css"]
-    copyright = "Author"
-    readmore = true
-    authorbox = true
-    post_meta = ["date", "categories"]
-    twitter_cards = true
+  customCSS = ["css/custom.css"]
+  copyright = "Author"
+  readmore = true
+  authorbox = true
+  post_meta = ["date", "categories"]
+  twitter_cards = true
 
 # ページのテーマカラー
 [Params.style.vars]
@@ -39,7 +39,7 @@ paginate = 20
     home = "right"
     list = "right"
     single = "right"
-    widgets = ["search", "recent", "categories", "taglist", "social"]
+    widgets = ["recent", "categories", "taglist", "social"]
 
 # 画像表示用オプション
  [markup]

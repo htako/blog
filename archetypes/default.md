@@ -1,8 +1,8 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
+date: {{ .Date | time.Format "2006-01-02" }}
 categories: [""]
 tags: [""]
-menu: main
+debug: true
 ---
 
