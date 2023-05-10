@@ -3,7 +3,6 @@ title: "20230511"
 date: 2023-05-11
 categories: ["lifelog"]
 tags: [""]
-debug: true
 ---
 
 ## とりあえずやりたいこと１
