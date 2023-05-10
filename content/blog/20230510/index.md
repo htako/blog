@@ -2,8 +2,7 @@
 title: "まだhugoのひゅの字も知らない"
 date: 2023-05-10
 categories: ["hugo"]
-tags: [""]
-debug: true
+tags: ["blog"]
 ---
 
 ## hugo の記事を書くときの tips

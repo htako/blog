@@ -2,7 +2,7 @@
 title: "github actionsが動いてなかった"
 date: 2023-05-09
 categories: ["hugo"]
-tags: ["blog", "github actions"]
+tags: ["blog", "github pages", "github actions"]
 ---
 
 ## OSのイメージを変えたら進んだ
